@@ -26,13 +26,18 @@ class PublicController extends AbstractController {
     // on passe les infos à la vue twig
     //o n modifie cett evue twig
     // on crée un lien dans la vue twig accueil pour aller vers la route article.
-    #[ Route( '/public', name: 'app_public' ) ]
-    #[ Route( '/Accueil', name: 'app_accueil' ) ]
+    #[ Route( '/', name: 'app_accueil' ) ]
+    
+    public function __construct(ArticlesRepository $articleRepository) {
+        $this -> articleRepository = $articleRepository;
+    }
+
 
     public function index(): Response {
 
+        $articles = $this -> articleRepository -> findAll();
         return $this->render( 'public/index.html.twig', [
-            'controller_name' => 'PublicController',
+            'articles' => $articles
         ] );
         
         $article = $this -> articleRepository -> find( $idArticle );
