@@ -27,6 +27,7 @@ class PublicController extends AbstractController {
     //o n modifie cett evue twig
     // on crée un lien dans la vue twig accueil pour aller vers la route article.
     #[ Route( '/public', name: 'app_public' ) ]
+    #[ Route( '/Accueil', name: 'app_accueil' ) ]
 
     public function index(): Response {
 
