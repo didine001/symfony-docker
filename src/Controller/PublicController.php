@@ -8,11 +8,6 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\ArticlesRepository;
 
 class PublicController extends AbstractController {
-    private ArticlesRepository $articleRepository;
-
-    public function __construct( ArticlesRepository $articleRepository ) {
-        $this -> articleRepository = $articleRepository;
-    }
     //1 article repository a ajouter en auto wiring
     //1.5 On crée une route Accueil ( qui v aafficher lse articles )
     //2 on charge les articles
@@ -23,6 +18,12 @@ class PublicController extends AbstractController {
     // on passe les infos à la vue twig
     //o n modifie cett evue twig
     // on crée un lien dans la vue twig accueil pour aller vers la route article.
+    private ArticlesRepository $articleRepository;
+
+    public function __construct( ArticlesRepository $articleRepository ) {
+        $this -> articleRepository = $articleRepository;
+    }
+
     #[ Route( '/', name: 'app_accueil' ) ]
 
     public function index(): Response {
@@ -30,7 +31,5 @@ class PublicController extends AbstractController {
         return $this->render( 'public/index.html.twig', [
             'articles' => $articles
         ] );
-
-        $article = $this -> articleRepository -> find( $idArticle );
     }
 }
