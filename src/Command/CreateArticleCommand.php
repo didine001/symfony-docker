@@ -39,7 +39,7 @@ class CreateArticleCommand extends Command {
         $io -> warning("Creation de ".$nb_articles.' articles');
         if($nb_articles < 1 ) return Command::FAILURE;
 
-        for($compteur = 0; $compteur < $nb_articles; $compteur++){
+        for($compteur =0 ; $compteur < $nb_articles; $compteur++){
             $io -> comment("Création article '.$compteur");
             $article = new Articles();
             $article -> setTitle("Article numéro ".$compteur);
