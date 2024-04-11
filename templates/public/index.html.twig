@@ -1,84 +1,101 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PublicController!{% endblock %}
+{% block title %}Hello PublicController!
+{% endblock %}
 
 {% block stylesheets %}
-<style>
-    body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #141332;
-        color: white;
-        margin: 0;
-        padding: 0;
-    }
-    
-    .article {
-        background-color: #1f1e4d;
-        border-radius: 10px;
-        margin: 20px auto;
-        padding: 20px;
-        max-width: 600px;
-    }
+	<style>
+		body {
+			font-family: 'Poppins', sans-serif;
+			background-color: #141332;
+			color: white;
+			margin: 0;
+			padding: 0;
+		}
 
-    .article h1 {
-        font-size: 24px;
-        margin: 0;
-    }
+		.article {
+			background-color: #1f1e4d;
+			border-radius: 10px;
+			margin: 20px auto;
+			padding: 20px;
+			max-width: 600px;
+		}
 
-    .article h3 {
-        font-size: 18px;
-        margin-top: 5px;
-        margin-bottom: 10px;
-    }
+		.article h1 {
+			font-size: 24px;
+			margin: 0;
+		}
 
-    .article p {
-        font-size: 14px;
-        margin: 0;
-    }
+		.article h3 {
+			font-size: 18px;
+			margin-top: 5px;
+			margin-bottom: 10px;
+		}
 
-    .btn {
-        background-color: #6d39ed;
-        padding: 10px 20px; 
-        border-radius: 2px;
-        width: fit-content; 
-        margin: 10px auto;
-        display: flex;
-        justify-content: center;
-        align-items: center; 
-    }
+		.article p {
+			font-size: 14px;
+			margin: 0;
+		}
 
-    .btn:hover {
-        background-color: #341aa2;
-        color: white;  
-    }
-</style>
+		.btn {
+			background-color: #6d39ed;
+			padding: 10px 20px;
+			border-radius: 2px;
+			width: fit-content;
+			margin: 10px auto;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.btn:hover {
+			background-color: #341aa2;
+			color: white;
+		}
+	</style>
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        {% for article in articles %}
-            <div class="article">
-                <h1>{{ article.Title }}</h1>
-                <p>{{ article.Auteur }}</p>
-                <p>{{ article.Date | date('d-m-Y') }}</p>
-                <a href="{{ path('app_article', {'id': article.id}) }}" class="btn btn-primary info">DETAILS</a>
-                {% if is_granted('ROLE_USER') %}
-                    <div class="article">
-                        <form method="post" action="{{ path('comment_create') }}">
-                            <button type="submit" class="btn btn-primary">Commenter</button>
-                            <input type="hidden" name="_token" value="{{ csrf_token('comment') }}">
-                        </form>
-                    </div>
-                {% endif %}
-            </div>
-        {% endfor %}
-          {% if is_granted('ROLE_ADMIN') %}
-                    <div class="article">
-                        <form method="post" action="{{ path('article_create') }}">
-                            <button type="submit" class="btn btn-primary">Ajouter un article</button>
-                            <input type="hidden" name="_token" value="{{ csrf_token('comment') }}">
-                        </form>
-                    </div>
-                {% endif %}
-    </div>
+	<div class="container">
+		{% for article in articles %}
+			<div class="article">
+				<h1>{{ article.Title }}</h1>
+				<p>{{ article.Auteur }}</p>
+				<p>{{ article.Date | date('d-m-Y') }}</p>
+				<a href="{{ path('app_article', {'id': article.id}) }}" class="btn btn-primary info">DETAILS</a>
+				{% if is_granted('ROLE_USER') %}
+					<div class="article">
+						<form method="post" action="{{ path('comment_create') }}">
+							<button type="submit" class="btn btn-primary">Commenter</button>
+							<input type="hidden" name="_token" value="{{ csrf_token('comment') }}">
+						</form>
+					</div>
+					{% if is_granted('ROLE_ADMIN') %}
+						<div class="article">
+							<form method="post" action="{{ path('article_modify', {'id': article.id}) }}">
+								<button type="submit" class="btn btn-primary">Modifier un article</button>
+								<input type="hidden" name="_token" value="{{ csrf_token('comment') }}">
+							</form>
+						</div>
+					{% endif %}
+                    {% if is_granted('ROLE_USER') %}
+						<div class="article">
+							<form method="post" action="{{ path('commentaires_modify', {'id': article.id}) }}">
+								<button type="submit" class="btn btn-primary">Modifier un commentaire</button>
+								<input type="hidden" name="_token" value="{{ csrf_token('comment') }}">
+							</form>
+						</div>
+					{% endif %}
+				{% endif %}
+			</div>
+		{% endfor %}
+		{% if is_granted('ROLE_ADMIN') %}
+			<div class="article">
+				<form method="post" action="{{ path('article_create') }}">
+					<button type="submit" class="btn btn-primary">Ajouter un article</button>
+					<input type="hidden" name="_token" value="{{ csrf_token('comment') }}">
+				</form>
+			</div>
+		{% endif %}
+	</div>
 {% endblock %}
