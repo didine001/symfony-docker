@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            font-weight: bold;
+            font-size: 24px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #6d39ed;
+        }
+
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #6d39ed;
+        }
+
+        .form-control {
+            width: 90%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control::placeholder {
+            color: #ccc;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #6d39ed;
+        }
+
+        .checkbox-label {
+            color: #6d39ed;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .checkbox-input {
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        .register-button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 50px;
+            font-size: 20px;
+            background-color: #6d39ed;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .register-button:hover {
+            background-color: #341aa2;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="title">Register</h1>
+        {% for flash_error in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+        {% endfor %}
+
+        {{ form_errors(registrationForm) }}
+
+        {{ form_start(registrationForm) }}
+            <div class="form-group">
+                <label class="form-label" for="registrationForm_email">Email</label>
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Enter your email'}}) }}
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="registrationForm_plainPassword">Password</label>
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Enter your password'}}) }}
+            </div>
+            <button type="submit" class="register-button">Register</button>
+        {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}

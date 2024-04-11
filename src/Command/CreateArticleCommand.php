@@ -13,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[ AsCommand(
-    name: 'app-create-articles',
+    name: 'app:create-articles',
     description: 'Create article',
 ) ]
 

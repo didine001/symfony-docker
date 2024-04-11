@@ -55,14 +55,30 @@
 {% endblock %}
 
 {% block body %}
-<div class="container">
-    {% for article in articles %}
-    <div class="article">
-        <h1>{{ article.Title }}</h1>
-        <p>{{ article.Auteur }}</p>
-        <p>{{ article.Date | date('d-m-Y') }}</p>
-        <a href="{{ path('app_article', {'id': article.id}) }}" class="btn btn-primary info">DETAILS</a>
+    <div class="container">
+        {% for article in articles %}
+            <div class="article">
+                <h1>{{ article.Title }}</h1>
+                <p>{{ article.Auteur }}</p>
+                <p>{{ article.Date | date('d-m-Y') }}</p>
+                <a href="{{ path('app_article', {'id': article.id}) }}" class="btn btn-primary info">DETAILS</a>
+                {% if is_granted('ROLE_USER') %}
+                    <div class="article">
+                        <form method="post" action="{{ path('comment_create') }}">
+                            <button type="submit" class="btn btn-primary">Commenter</button>
+                            <input type="hidden" name="_token" value="{{ csrf_token('comment') }}">
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+          {% if is_granted('ROLE_ADMIN') %}
+                    <div class="article">
+                        <form method="post" action="{{ path('article_create') }}">
+                            <button type="submit" class="btn btn-primary">Ajouter un article</button>
+                            <input type="hidden" name="_token" value="{{ csrf_token('comment') }}">
+                        </form>
+                    </div>
+                {% endif %}
     </div>
-    {% endfor %}
-</div>
 {% endblock %}

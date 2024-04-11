@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!
+{% endblock %}
+
+{% block stylesheets %}
+	<style>
+		body {
+			font-family: 'Poppins', sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f8f9fa;
+		}
+
+		.login-container {
+			width: 300px;
+			margin: 100px auto;
+			padding: 20px;
+			border-radius: 10px;
+			background-color: #ffffff;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+		}
+
+		.login-header {
+			font-weight: bold;
+			font-size: 24px;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			text-align: center;
+			color: #6d39ed;
+		}
+
+		.login-label {
+			font-weight: bold;
+			margin-bottom: 5px;
+			color: #6d39ed;
+		}
+
+		.login-input {
+			width: 90%;
+			padding: 10px;
+			border-radius: 5px;
+			margin-bottom: 20px;
+			border: 1px solid #ccc;
+			transition: border-color 0.3s ease;
+		}
+
+		.login-input::placeholder {
+			color: #ccc;
+		}
+
+		.login-input:focus {
+			outline: none;
+			border-color: #6d39ed;
+		}
+
+		.login-button {
+			width: 100%;
+			padding: 10px;
+			border-radius: 50px;
+			font-size: 20px;
+			background-color: #6d39ed;
+			color: white;
+			border: none;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+		}
+
+		.login-button:hover {
+			background-color: #341aa2;
+		}
+
+		.register-link {
+			display: block;
+			text-align: center;
+			margin-top: 10px;
+			color: #6d39ed;
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+	<div class="login-container">
+		<h1 class="login-header">Please sign in</h1>
+		<form method="post">
+			{% if error %}
+				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{% endif %}
+
+			<label class="login-label" for="username">Email</label>
+			<input type="email" value="{{ last_username }}" name="_username" id="username" class="login-input" autocomplete="email" required autofocus>
+
+			<label class="login-label" for="password">Password</label>
+			<input type="password" name="_password" id="password" class="login-input" autocomplete="current-password" required>
+
+			<button class="login-button" type="submit">Sign in</button>
+		</form>
+
+		<a class="register-link" href="{{ path('app_register') }}">Register</a>
+	</div>
+{% endblock %}

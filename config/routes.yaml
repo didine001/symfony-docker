@@ -7,3 +7,8 @@ controllers:
 app_article:
     path: /article/{id}
     controller: 'App\Controller\PublicController::article'
+
+app_commentaires_create:
+    path: /commentaires/create
+    controller: App\Controller\CommentairesController::create
+    methods: ['POST']
