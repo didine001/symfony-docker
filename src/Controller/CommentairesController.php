@@ -23,10 +23,12 @@ class CommentairesController extends AbstractController {
             $date = $form->get('Date')->getData();
             $auteur = $form->get('Auteur')->getData();
             $titre = $form->get('Title')->getData();
+            $article = $form->get('articles')->getData();
             $commentaire->setDescription($description);
             $commentaire->setDate($date);
             $commentaire->setAuteur($auteur);
             $commentaire->setTitle($titre);
+            $commentaire->setArticles($article);
             $entityManager->persist( $commentaire );
             $entityManager->flush();
             return $this->redirectToRoute('app_accueil');

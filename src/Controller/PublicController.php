@@ -27,10 +27,9 @@ class PublicController extends AbstractController {
     #[ Route( '/article/{id}', name: 'app_article' ) ]
     public function article( int $id ): Response {
         $article = $this ->articleRepository-> find( $id );
-        $comms = $this ->commentairesRepository-> findAll();
         return $this->render( 'public/article.html.twig', [
             'article' => $article,
-            'comms' => $comms
+            'comms' => $article->getComms(),
         ] );
     }
 }
