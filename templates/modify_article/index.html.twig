@@ -1,16 +1,104 @@
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Modification d'article{% endblock %}
 
-{% block body %}
-    <h1>Modifier l'article</h1>
+{% block stylesheets %}
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Couleur de fond */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Centrage vertical */
+        }
 
-    {{ form_start(form) }}
-        {{ form_row(form.Title) }}
-        {{ form_row(form.Description) }}
-        {{ form_row(form.Auteur) }}
-        {{ form_row(form.Date) }}
-        <button type="submit">Ajouter l'article</button>
-    {{ form_end(form) }}
+        .card {
+            width: 300px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #ffffff; /* Couleur de fond blanche */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            font-weight: bold;
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #6d39ed; /* Couleur de titre violette */
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #6d39ed; /* Couleur de texte violette */
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #f8f9fa; /* Couleur de fond des champs */
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input::placeholder {
+            color: #ccc; /* Couleur de texte de placeholder */
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #6d39ed; /* Couleur de bordure violette au focus */
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #6d39ed; /* Couleur de fond violette */
+            color: white; /* Couleur de texte blanc */
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #341aa2; /* Couleur violette plus foncée au survol */
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <h2 class="card-header">Modification d'article</h2>
+
+        <form action="#" method="post">
+            <div class="form-group">
+                <label for="title" class="form-label">Titre</label>
+                <input type="text" name="title" id="title" class="form-input" placeholder="Entrez le titre">
+            </div>
+            <div class="form-group">
+                <label for="description" class="form-label">Description</label>
+                <textarea name="description" id="description" class="form-input" placeholder="Entrez la description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="auteur" class="form-label">Auteur</label>
+                <input type="text" name="auteur" id="auteur" class="form-input" placeholder="Entrez votre nom">
+            </div>
+            <div class="form-group">
+                <label for="date" class="form-label">Date</label>
+                <input type="date" name="date" id="date" class="form-input">
+            </div>
+
+            <button type="submit" class="btn-submit">Modifier l'article</button>
+        </form>
+    </div>
 {% endblock %}

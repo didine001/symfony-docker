@@ -78,7 +78,7 @@
 							</form>
 						</div>
 					{% endif %}
-                    {% if is_granted('ROLE_USER') %}
+                    {% if is_granted('ROLE_ADMIN') %}
 						<div class="article">
 							<form method="post" action="{{ path('commentaires_modify', {'id': article.id}) }}">
 								<button type="submit" class="btn btn-primary">Modifier un commentaire</button>
